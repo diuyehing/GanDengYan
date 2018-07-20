@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GanDengYan
 {
+    [Serializable]
     class Player
     {
         public int ID { get; set; }

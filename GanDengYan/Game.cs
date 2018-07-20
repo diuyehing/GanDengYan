@@ -3,30 +3,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace GanDengYan
 {
     [Serializable]
     struct Game
     {
-        public DateTime dateTime;
-        public int winner;
-        public int numCards;
-        public int numBomb;
+        public DateTime Time { get; set; }
+        public int Winner { get; set; }
+        public int NumCards { get; set; }
+        public int NumBomb { get; set; }
     }
 
+    [Serializable]
     struct ScoreResult
     {
-        public DateTime dateTime;
-        public int numBomb;
-        public int score0;
-        public int score1;
-        public int score2;
-        public int score3;
-        public int score4;
-        public int score5;
+        public DateTime Time { get; set; }
+        public int NumBomb { get; set; }
+        public int Score0 { get; set; }
+        public int Score1 { get; set; }
+        public int Score2 { get; set; }
+        public int Score3 { get; set; }
+        public int Score4 { get; set; }
+        public int Score5 { get; set; }
     }
 
+    [Serializable]
+    struct Dinner
+    {
+        public DateTime Time { get; set; }
+        public int TotalCost { get; set; }
+        public int Cost0 { get; set; }
+        public int Cost1 { get; set; }
+        public int Cost2 { get; set; }
+        public int Cost3 { get; set; }
+        public int Cost4 { get; set; }
+        public int Cost5 { get; set; }
+    }
+
+    [Serializable]
     class GameWorld
     {
         private const int CARD_BIT_COUNT = 5;
@@ -36,6 +55,7 @@ namespace GanDengYan
         public List<Game> Games { get; private set; }
         public List<Player> Players { get; private set; }
         public List<ScoreResult> ScoreResults { get; private set; }
+        public List<Dinner> Dinners { get; private set; }
 
         public GameWorld(List<string> playerNames, int fan)
         {
@@ -43,6 +63,7 @@ namespace GanDengYan
             Games = new List<Game>();
             Players = new List<Player>();
             ScoreResults = new List<ScoreResult>();
+            Dinners = new List<Dinner>();
 
             for (int i = 0; i < playerNames.Count; ++i)
             {
@@ -50,6 +71,7 @@ namespace GanDengYan
                 player.Name = playerNames[i];
                 player.ID = i;
                 player.Score = 0;
+                Players.Add(player);
             }
         }
 
@@ -59,40 +81,46 @@ namespace GanDengYan
                 return;
 
             Game game = new Game();
-            game.dateTime = DateTime.Now;
-            game.numBomb = numBomb;
-            game.winner = 0;
-            game.numCards = 0;
+            game.Time = DateTime.Now;
+            game.NumBomb = numBomb;
+            game.Winner = 0;
+            game.NumCards = 0;
 
+            int numWinner = 0;
             for (int i = 0; i < Players.Count; ++i)
             {
-                game.numCards |= numCards[i] << (i * CARD_BIT_COUNT);
+                game.NumCards |= numCards[i] << (i * CARD_BIT_COUNT);
                 if (numCards[i] == 0)
-                    game.winner = i;
+                {
+                    game.Winner = i;
+                    numWinner++;
+                }
             }
 
-            AddGame(game);
+            if (numWinner == 1)
+                AddGame(game);
         }
 
         private void AddGame(Game game)
         {
             ScoreResult scoreResult = new ScoreResult();
-            scoreResult.dateTime = game.dateTime;
-            scoreResult.numBomb = game.numBomb;
+            scoreResult.Time = game.Time;
+            scoreResult.NumBomb = game.NumBomb;
 
+            Object scoreResultBox = scoreResult;
             int winnerScore = 0;
             for (int i = 0; i < Players.Count; ++i)
             {
-                int score = ComputeScore(game.numBomb, GetNumCard(game.numCards, i));
+                int score = ComputeScore(game.NumBomb, GetNumCard(game.NumCards, i));
                 winnerScore -= score;
-                scoreResult.GetType().GetField(string.Format("score{0}", i)).SetValue(scoreResult, score);
+                scoreResult.GetType().GetProperty(string.Format("Score{0}", i)).SetValue(scoreResultBox, score);
                 Players[i].Score += score;
             }
-            scoreResult.GetType().GetField(string.Format("score{0}", game.winner)).SetValue(scoreResult, winnerScore);
-            Players[game.winner].Score += winnerScore;
+            scoreResult.GetType().GetProperty(string.Format("Score{0}", game.Winner)).SetValue(scoreResultBox, winnerScore);
+            Players[game.Winner].Score += winnerScore;
 
             Games.Add(game);
-            ScoreResults.Add(scoreResult);
+            ScoreResults.Add((ScoreResult)scoreResultBox);
         }
 
         public void RemoveGame(int index)
@@ -101,11 +129,11 @@ namespace GanDengYan
             int winnerScore = 0;
             for (int i = 0; i < Players.Count; ++i)
             {
-                int score = ComputeScore(game.numBomb, GetNumCard(game.numCards, i));
+                int score = ComputeScore(game.NumBomb, GetNumCard(game.NumCards, i));
                 winnerScore -= score;
                 Players[i].Score -= score;
             }
-            Players[game.winner].Score -= winnerScore;
+            Players[game.Winner].Score -= winnerScore;
 
             Games.RemoveAt(index);
             ScoreResults.RemoveAt(index);
@@ -121,6 +149,50 @@ namespace GanDengYan
         private int GetNumCard(int numCards, int index)
         {
             return (numCards >> (index * CARD_BIT_COUNT)) & ((1 << CARD_BIT_COUNT) - 1);
+        }
+
+        public void AddDinner(int cost)
+        {
+            Dinner dinner = new Dinner();
+            dinner.Time = DateTime.Now;
+            dinner.TotalCost = cost;
+
+            Object dinnerBox = dinner;
+
+            int totalScore = 0;
+            for (int i = 0; i < Players.Count; ++i)
+            {
+                if (Players[i].Score < 0)
+                    totalScore -= Players[i].Score;
+            }
+
+            if (totalScore >= cost)
+            {
+                for (int i = 0; i < Players.Count; ++i)
+                {
+                    if (Players[i].Score < 0)
+                    {
+                        double t = (double)(-Players[i].Score) / (double)totalScore;
+                        Players[i].Score += (int)(cost * t);
+                    }
+                    else if (Players[i].Score > 0)
+                    {
+                        double t = (double)(Players[i].Score) / (double)totalScore;
+                        Players[i].Score -= (int)(cost * t);
+                    }
+                }
+            }
+            else
+            {
+                cost = (cost - totalScore) / Players.Count;
+                for (int i = 0; i < Players.Count; ++i)
+                {
+                    Players[i].Score = 0;
+                    dinner.GetType().GetProperty(string.Format("Cost{0}", i)).SetValue(dinnerBox, -cost);
+                }
+            }
+
+            Dinners.Add((Dinner)dinnerBox);
         }
     }
 }

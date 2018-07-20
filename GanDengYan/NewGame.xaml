@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GanDengYan"
         mc:Ignorable="d"
         Title="NewGame" Height="298.843" Width="239.901">
-	<Grid HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="326">
+	<Grid x:Name="NewGameGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="326">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="Auto"/>
@@ -28,12 +28,12 @@
 		<Label Content="Player 5" HorizontalAlignment="Left" Margin="12,3,0,0" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top"/>
 		<Label Content="Player 6" HorizontalAlignment="Left" Margin="12,3,0,0" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top"/>
 		<Label Content="FAN" HorizontalAlignment="Left" Margin="12,10,0,35" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center"/>
-		<TextBox x:Name="Player1NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="0" HorizontalAlignment="Left"/>
-		<TextBox x:Name="Player2NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="1" HorizontalAlignment="Left"/>
-		<TextBox x:Name="Player3NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="2" HorizontalAlignment="Left"/>
-		<TextBox x:Name="Player4NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="3" HorizontalAlignment="Left"/>
-		<TextBox x:Name="Player5NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="4" HorizontalAlignment="Left"/>
-		<TextBox x:Name="Player6NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="5" HorizontalAlignment="Left"/>
+		<TextBox x:Name="Player0NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="0" HorizontalAlignment="Left"/>
+		<TextBox x:Name="Player1NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="1" HorizontalAlignment="Left"/>
+		<TextBox x:Name="Player2NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="2" HorizontalAlignment="Left"/>
+		<TextBox x:Name="Player3NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="3" HorizontalAlignment="Left"/>
+		<TextBox x:Name="Player4NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="4" HorizontalAlignment="Left"/>
+		<TextBox x:Name="Player5NamaTextBox" Grid.Column="1" Height="23" Margin="12,3,0,0" Grid.RowSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="5" HorizontalAlignment="Left"/>
 		<TextBox x:Name="FANTextBox" Height="23" Margin="60,14,0,0" TextWrapping="Wrap" Width="120" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Text="15" TextAlignment="Center" FontSize="16"/>
 		<Button Grid.ColumnSpan="2" Content="OK" HorizontalAlignment="Left" Margin="12,51,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 		<Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="47,51,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>

@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:GanDengYan"
 		xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="422.108" Width="866.012">
+        Title="MainWindow" Height="597.831" Width="863.223">
+	<Window.Resources>
+		<Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+			<Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+		</Style>
+	</Window.Resources>
+
 	<Grid>
 		<Grid x:Name="CardGrid" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="698">
 			<Grid.ColumnDefinitions>
@@ -23,48 +29,63 @@
 				<RowDefinition Height="2*"/>
 			</Grid.RowDefinitions>
 			<Label Content="Bomb" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="0"/>
-			<Label x:Name="Plyer0NameLable" Content="Label" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="1"/>
-			<Label x:Name="Plyer1NameLable" Content="Label" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="2"/>
-			<Label x:Name="Plyer2NameLable" Content="Label" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="3"/>
-			<Label x:Name="Plyer3NameLable" Content="Label" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="4"/>
-			<Label x:Name="Plyer4NameLable" Content="Label" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="5"/>
-			<Label x:Name="Plyer5NameLable" Content="Label" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="6"/>
-			<xctk:IntegerUpDown x:Name="BombUpDown" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="0" />
-			<xctk:IntegerUpDown x:Name="Player0UpDown" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="1" />
-			<xctk:IntegerUpDown x:Name="Player1UpDown" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="2" />
-			<xctk:IntegerUpDown x:Name="Player2UpDown" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="3" />
-			<xctk:IntegerUpDown x:Name="Player3UpDown" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="4" />
-			<xctk:IntegerUpDown x:Name="Player4UpDown" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="5" />
-			<xctk:IntegerUpDown x:Name="Player5UpDown" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="6" />
+			<Label x:Name="Plyer0NameLable" Content="" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="1" FontSize="20"/>
+			<Label x:Name="Plyer1NameLable" Content="" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="2" FontSize="20"/>
+			<Label x:Name="Plyer2NameLable" Content="" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="3" FontSize="20"/>
+			<Label x:Name="Plyer3NameLable" Content="" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="4" FontSize="20"/>
+			<Label x:Name="Plyer4NameLable" Content="" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="5" FontSize="20"/>
+			<Label x:Name="Plyer5NameLable" Content="" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.426,0.152" Grid.Column="6" FontSize="20"/>
+			<xctk:IntegerUpDown x:Name="BombUpDown" Minimum="0" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="0" />
+			<xctk:IntegerUpDown x:Name="Player0UpDown" Minimum="0" Maximum="18" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="1" />
+			<xctk:IntegerUpDown x:Name="Player1UpDown" Minimum="0" Maximum="18" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="2" />
+			<xctk:IntegerUpDown x:Name="Player2UpDown" Minimum="0" Maximum="18" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="3" />
+			<xctk:IntegerUpDown x:Name="Player3UpDown" Minimum="0" Maximum="18" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="4" />
+			<xctk:IntegerUpDown x:Name="Player4UpDown" Minimum="0" Maximum="18" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="5" />
+			<xctk:IntegerUpDown x:Name="Player5UpDown" Minimum="0" Maximum="18" Value="0" RenderTransformOrigin="3.543,8.604" Grid.Row="1" Margin="10" FontSize="36" Grid.Column="6" />
 		</Grid>
 		<Grid HorizontalAlignment="Left" Height="247" Margin="10,134,0,0" VerticalAlignment="Top" Width="698">
-			<ListView x:Name="ScoreListViewer" HorizontalAlignment="Left" Height="227" Margin="10,10,0,0" VerticalAlignment="Top" Width="678">
+			<ListView x:Name="ScoreListViewer" ItemContainerStyle="{StaticResource ResourceKey=ListViewItemStyle}" HorizontalAlignment="Left" Height="227" Margin="10,10,0,0" VerticalAlignment="Top" Width="678">
 				<ListView.View>
 					<GridView x:Name="ScoreGridView">
-						<GridViewColumn DisplayMemberBinding="{Binding time}" Header="日期"/>
-						<GridViewColumn DisplayMemberBinding="{Binding numBomb}" Header="炸弹"/>
-						<GridViewColumn DisplayMemberBinding="{Binding score0}" Header="1"/>
-						<GridViewColumn DisplayMemberBinding="{Binding score1}" Header="1"/>
-						<GridViewColumn DisplayMemberBinding="{Binding score2}" Header="1"/>
-						<GridViewColumn DisplayMemberBinding="{Binding score3}" Header="1"/>
-						<GridViewColumn DisplayMemberBinding="{Binding score4}" Header="1"/>
-						<GridViewColumn DisplayMemberBinding="{Binding score5}" Header="1"/>
+						<GridViewColumn DisplayMemberBinding="{Binding Time}"  Width="150" Header="日期"/>
+						<GridViewColumn DisplayMemberBinding="{Binding NumBomb}"  Width="50" Header="炸弹"/>
 						<GridViewColumn Header="操作" Width="100">
 							<GridViewColumn.CellTemplate>
 								<DataTemplate>
-									<Button x:Name="BtnDelete" Width="100" Content="删除" Click="BtnDelete_Click"/>
+									<Button x:Name="BtnDelete" Width="50" Content="X" Click="BtnDelete_Click"/>
 								</DataTemplate>
 							</GridViewColumn.CellTemplate>
 						</GridViewColumn>
 					</GridView>
 				</ListView.View>
 			</ListView>
-
 		</Grid>
+
+		<Grid HorizontalAlignment="Left" Height="247" Margin="10,134,0,0" VerticalAlignment="Top" Width="698">
+			<ListView x:Name="DinnerListViewer" ItemContainerStyle="{StaticResource ResourceKey=ListViewItemStyle}" HorizontalAlignment="Left" Height="150" Margin="12,266,0,-169" VerticalAlignment="Top" Width="671">
+				<ListView.View>
+					<GridView x:Name="DinnerGridView">
+						<GridViewColumn DisplayMemberBinding="{Binding Time}"  Width="150" Header="日期"/>
+						<GridViewColumn DisplayMemberBinding="{Binding TotalCost}"  Width="100" Header="饭钱"/>
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</Grid>
+
 		<Button Content="+" HorizontalAlignment="Left" Margin="757,23,0,0" VerticalAlignment="Top" Width="75" Height="95" FontSize="72" Click="Button_Click"/>
-		<Button Content="New" HorizontalAlignment="Left" Margin="757,277,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-		<Button Content="Save" HorizontalAlignment="Left" Margin="757,310,0,0" VerticalAlignment="Top" Width="75"/>
-		<Button Content="Load" HorizontalAlignment="Left" Margin="757,345,0,0" VerticalAlignment="Top" Width="75"/>
+		<Button Content="New" HorizontalAlignment="Left" Margin="757,463,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+		<Button Content="Save" HorizontalAlignment="Left" Margin="757,496,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+		<Button Content="Load" HorizontalAlignment="Left" Margin="757,531,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_4"/>
+		<StackPanel x:Name="ScoreStackPanel" HorizontalAlignment="Left" Height="188" Margin="722,146,0,0" VerticalAlignment="Top" Width="126">
+			<Label x:Name="Score0Label" Content="" FontSize="16"/>
+			<Label x:Name="Score1Label" Content="" FontSize="16"/>
+			<Label x:Name="Score2Label" Content="" FontSize="16"/>
+			<Label x:Name="Score3Label" Content="" FontSize="16"/>
+			<Label x:Name="Score4Label" Content="" FontSize="16"/>
+			<Label x:Name="Score5Label" Content="" FontSize="16"/>
+		</StackPanel>
+		<TextBox x:Name="DinnerCostTextBox" HorizontalAlignment="Left" Height="19" Margin="721,417,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="77" TextAlignment="Center"/>
+		<Button Content="+" HorizontalAlignment="Left" Margin="815,417,0,0" VerticalAlignment="Top" Width="24" Click="Button_Click_2"/>
 
 	</Grid>
 </Window>

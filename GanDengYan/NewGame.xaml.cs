@@ -19,6 +19,9 @@ namespace GanDengYan
     /// </summary>
     public partial class NewGame : Window
     {
+        public List<string> PlayerNames = new List<string>();
+        public int FAN = 15;
+
         public NewGame()
         {
             InitializeComponent();
@@ -26,6 +29,18 @@ namespace GanDengYan
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            for (int i = 0; i < 6; ++i)
+            {
+                TextBox nameTextBox = NewGameGrid.FindName(string.Format("Player{0}NamaTextBox", i)) as TextBox;
+                if (nameTextBox == null || nameTextBox.Text == null)
+                    break;
+                if (nameTextBox.Text == "")
+                    break;
+                PlayerNames.Add(nameTextBox.Text);
+            }
+            if (int.TryParse(FANTextBox.Text, out FAN) == false)
+                return;
+            
             this.DialogResult = true;
             this.Close();
         }
